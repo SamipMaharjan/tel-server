@@ -1,0 +1,10 @@
+.env
+node_modules
+
+*lock.json
+*lock.yaml
+*lock.yml
+*.log
+test.json
+
+uploads/*
