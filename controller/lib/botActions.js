@@ -1,0 +1,55 @@
+const { Axios } = require("./axios");
+// const parseCreateBetData = (data) => {
+//   const lines = data.split("\n");
+//   const json = {};
+//   lines.forEach((line) => {
+//     const [key, value] = line
+//       .trim()
+//       .split(":")
+//       .map((s) => s.trim());
+//     json[key] = value;
+//   });
+//   console.log("json", json);
+//   return json;
+// };
+
+const parseCreateBetData = (data) => {
+  const lines = data.split("\n");
+  const json = {};
+
+  lines.forEach((line) => {
+    const trimmedLine = line.trim();
+    if (!trimmedLine || !trimmedLine.includes(":")) return;
+
+    // Split only on the first colon
+    const [key, ...valueParts] = trimmedLine.split(":");
+    const value = valueParts.join(":").trim();
+
+    if (key && value) {
+      json[key.trim()] = value;
+    }
+  });
+
+  console.log("json", json);
+  return json;
+};
+
+function sendMessage(message, messageText) {
+  console.log("inside send msg");
+
+  return Axios.get("/sendMessage", {
+    params: {
+      chat_id: message.chat.id,
+      text: messageText,
+    },
+  });
+}
+
+// const seperateCommand = (message) => {
+//   if (message.charAt(0) === "/") {
+//     const command = message.split(" ")[0];
+//     return command;
+//   }
+//   return "";
+// };
+module.exports = { parseCreateBetData, sendMessage };

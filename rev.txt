@@ -1,0 +1,28 @@
+{
+    "email":"manpane98@gmail.com",
+    "password": "1234568---9"
+}
+
+
+
+/createBet- creates bet 
+    {
+        /submit: to submit the metadata of bet.
+        /exit: (to terminate the process) 
+        /add: (to specify what to add)
+        {
+            /icon - icon(required)
+            /title - title(required)
+            /description - description(required)
+            /start - start date(required)
+            /end - end date(required)
+            /minBet - min bet(required)
+            /maxBet - max bet(required)
+            /odds - odds(required)
+            /creator - creator(required)
+            /status - status(required)
+            
+            /link - for the amount if its dynamic
+            /button - for the user to pick sides 
+        }
+    }
