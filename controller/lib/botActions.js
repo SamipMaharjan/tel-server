@@ -30,13 +30,10 @@ const parseCreateBetData = (data) => {
     }
   });
 
-  console.log("json", json);
   return json;
 };
 
 function sendMessage(message, messageText) {
-  console.log("inside send msg");
-
   return Axios.get("/sendMessage", {
     params: {
       chat_id: message.chat.id,

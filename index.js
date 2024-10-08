@@ -1,40 +1,55 @@
 const express = require("express");
+require("dotenv").config();
 const PORT = 4040;
 const { handler } = require("./controller");
 const { Axios, BASE_URL } = require("./controller/lib/axios");
 const app = express();
+const { createServer } = require("http");
+const { connectToMongoDB } = require("./services/database.services");
+const { mainRouter } = require("./routes/mainRouter");
+const cors = require("cors");
+app.use(cors());
+// const corsOptions = {
+//   origin: "*", // Allow all origins
+//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//   preflightContinue: false,
+//   optionsSuccessStatus: 204,
+//   credentials: true,
+//   allowedHeaders: ["Content-Type", "Authorization"],
+// };
 
 app.use(express.json());
+app.use("/api", mainRouter);
 
 app.post("*", async (req, res) => {
   console.log("msg", req.body);
-  console.log("base u2rl", BASE_URL);
+  // console.log("base u2rl", BASE_URL);
   req.body && res.status(200).send("Succces");
 
   await handler(req);
-  // Axios.post("/sendMessage", {
-  //   chat_id: req.body.message.chat.id,
-  //   text: "hiiii",
-  // });
-
-  // const response = await fetch(
-  //   `${BASE_URL}/sendMessage?chat_id=${req.body.message.chat.id}&text=Hiiii_aslkdfjlkj`
-  // );
-
-  // console.log("rspnose", response);
-  // res.ok && res.status(200).send("Success");
-  // Axios.get("/sendMessage", {
-  //   chat_id: req.body.message.chat.id,
-  //   text: "hiiii",
-  // });
 });
 
-app.get("/actions", async (req, res) => {});
+// app.listen(PORT, function (err) {
+//   if (err) console.log(err);
+//   console.log("Listening on port" + PORT);
+// });
 
-app.listen(PORT, function (err) {
-  if (err) console.log(err);
-  console.log("Listening on port" + PORT);
+connectToMongoDB().then(async () => {
+  startServer();
 });
+
+const startServer = async () => {
+  try {
+    const PORT = process.env.PORT || 10000;
+    const server = createServer(app); // Actual Web server
+
+    server.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Error while starting the server: ", error);
+  }
+};
 
 // `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage?chat_id=${process.env.CHAT_ID}`;
 // https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage?chat_id=${process.env.CHAT_ID};

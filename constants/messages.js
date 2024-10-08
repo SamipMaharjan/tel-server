@@ -27,23 +27,24 @@ To create a bet, you need to send the following message to the bot.
 
 
     /createBet
-    image: [URL of the event image]
-    title: [Event title]
-    description: [Detailed description of the event]
+    icon: (required) [URL of the event image]
+    title: (required) [Event title]
+    label: (required) [Event label]
+    description: (required) [Detailed description of the event]
+    
+    status: [Current status of the event]
     start: [Start time of the event]
     end: [End time of the event]
     minBet: [Minimum bet amount]
     maxBet: [Maximum bet amount]
     odds: [Betting odds]
-    status: [Current status of the event]
-    Optional Fields
     icon: [URL of an icon]
     creator: [Name or ID of event creator]
 
     Example
     /createBet
 
-    image: https://example.com/chess-match.jpg
+    icon: https://example.com/chess-match.jpg
     title: Hikaru Nakamura vs Hans Niemann
     description: High-stakes chess match between Grandmasters Hikaru Nakamura and Hans Niemann
     start: 2024-10-15T18:00:00Z
