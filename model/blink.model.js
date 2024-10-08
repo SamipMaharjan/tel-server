@@ -9,6 +9,10 @@ const blinkSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  links: {
+    type: Object,
+    required: false,
+  },
   slug: { type: String, required: false },
   description: {
     type: String,

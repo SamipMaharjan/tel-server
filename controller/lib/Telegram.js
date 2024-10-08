@@ -1,8 +1,12 @@
 const { Axios } = require("./axios");
 const { createBetMessage, helpMessage } = require("../../constants/messages");
-const { handleCreateBet } = require("../createBet.route");
+const { handleCreateBet } = require("../bet.controller");
 const { sendMessage } = require("./botActions");
-
+const {
+  handleListBets,
+  handleRemoveAllBets,
+  handleRemoveBets,
+} = require("../bet.controller");
 function handleMessage(message) {
   if (!message?.text) return;
   const firstWord = message.text.split(" ")[0];
@@ -17,6 +21,14 @@ function handleMessage(message) {
         return sendMessage(message, "Hello, I'm a bot!");
       case "createBet":
         handleCreateBet(message);
+        break;
+      case "list":
+        handleListBets(message);
+      case "delete":
+        handleRemoveBets(message);
+        break;
+      case "deleteAll":
+        handleRemoveAllBets(message);
         break;
       case "help":
         return sendMessage(message, helpMessage);

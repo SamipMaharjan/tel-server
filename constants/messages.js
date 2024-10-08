@@ -31,6 +31,8 @@ To create a bet, you need to send the following message to the bot.
     title: (required) [Event title]
     label: (required) [Event label]
     description: (required) [Detailed description of the event]
+    options: [option-1], [option-2]
+    amount: [Amount of the bet]
     
     status: [Current status of the event]
     start: [Start time of the event]
@@ -47,6 +49,9 @@ To create a bet, you need to send the following message to the bot.
     icon: https://example.com/chess-match.jpg
     title: Hikaru Nakamura vs Hans Niemann
     description: High-stakes chess match between Grandmasters Hikaru Nakamura and Hans Niemann
+    options: Magnus, Hikaru
+    input: amount
+
     start: 2024-10-15T18:00:00Z
     end: 2024-10-15T22:00:00Z
     minBet: 0.1 SOL

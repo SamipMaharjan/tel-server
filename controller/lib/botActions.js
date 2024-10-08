@@ -26,6 +26,14 @@ const parseCreateBetData = (data) => {
     const value = valueParts.join(":").trim();
 
     if (key && value) {
+      if (key.trim().toLowerCase() === "options") {
+        json[key.trim()] = value.split(",").map((option) => ({
+          label: option.trim(),
+          value: option.trim(),
+        }));
+        return;
+      }
+
       json[key.trim()] = value;
     }
   });
