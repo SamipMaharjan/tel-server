@@ -70,10 +70,16 @@ async function handleListBets(message) {
     sendMessage(message, "No bets exists in your account");
   }
   bets.forEach((bet) => {
-    sendMessage(message, `${getDomainUrl()}/api/blink/${bet.slug}`);
+    sendMessage(
+      message,
+      `https://dial.to/?action=solana-action:${getDomainUrl()}/api/blink/${
+        bet.slug
+      }`
+    );
   });
   return;
 }
+
 function getDomainUrl() {
   const host = process.env.HOST || "localhost";
   const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
@@ -82,13 +88,15 @@ function getDomainUrl() {
 
   return `${protocol}://${host}${port}`;
 }
+
 async function handleRemoveBets(message) {
   const url = message.text.split(" ")[1];
-  const slug = url.split("/").slice(-1)[0];
+  const slug = url?.split("/")?.slice(-1)[0];
   console.log("slug", slug, "url", url);
   await Blink.findOneAndDelete({ slug });
   return sendMessage(message, "Bet removed!");
 }
+
 async function handleRemoveAllBets(message) {
   await Blink.deleteMany({});
   return sendMessage(message, "All bets removed!");

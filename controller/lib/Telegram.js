@@ -10,7 +10,6 @@ const {
 function handleMessage(message) {
   if (!message?.text) return;
   const firstWord = message.text.split(" ")[0];
-
   const messageText = message.text || "";
 
   // return sendMessage(message, messageText);
@@ -24,6 +23,7 @@ function handleMessage(message) {
         break;
       case "list":
         handleListBets(message);
+        break;
       case "delete":
         handleRemoveBets(message);
         break;

@@ -17,10 +17,14 @@ app.use(cors());
 //   credentials: true,
 //   allowedHeaders: ["Content-Type", "Authorization"],
 // };
-
 app.use(express.json());
-app.use("/api", mainRouter);
 
+// app.listen(PORT, function (err) {
+//   if (err) console.log(err);
+//   console.log("Listening on port" + PORT);
+// });
+
+app.use("/api", mainRouter);
 app.post("*", async (req, res) => {
   console.log("msg", req.body);
   // console.log("base u2rl", BASE_URL);
@@ -28,12 +32,6 @@ app.post("*", async (req, res) => {
 
   await handler(req);
 });
-
-// app.listen(PORT, function (err) {
-//   if (err) console.log(err);
-//   console.log("Listening on port" + PORT);
-// });
-
 connectToMongoDB().then(async () => {
   startServer();
 });

@@ -20,6 +20,9 @@
 
 const helpMessage = `
 You have started the process of creating a bet.
+/createBet - creates a new bet read more informatino below to dive into the specifics
+/help - displays this help message
+/list - lists all the 
 To create a bet, you need to send the following message to the bot.
 
     The format of the message should be 
