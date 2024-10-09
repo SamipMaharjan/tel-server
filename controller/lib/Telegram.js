@@ -33,7 +33,10 @@ function handleMessage(message) {
       case "help":
         return sendMessage(message, helpMessage);
       default:
-        return sendMessage(message, "No command found.");
+        return sendMessage(
+          message,
+          "No command found. Enter /help for more information."
+        );
     }
   } else {
     return sendMessage(message, messageText);
